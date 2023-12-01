@@ -18,7 +18,8 @@ public class MainManager : MonoBehaviour
     
     private bool m_GameOver = false;
 
-    
+    public Canvas canvas;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -72,5 +73,10 @@ public class MainManager : MonoBehaviour
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
+        if (m_Points > DataManager.Instance.bestScore)
+        {
+            DataManager.Instance.SetBestScore(m_Points);
+            canvas.GetComponentInChildren<ScoreUIManager>().UpdateBestScoreNameText();
+        }
     }
 }
